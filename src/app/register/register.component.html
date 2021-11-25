@@ -1,0 +1,55 @@
+
+
+<form align="center" #regcom="ngForm">
+    <label for="firstname">Firstname:</label>
+    <input type="text"  name="firstname" [(ngModel)]="data.firstname"><br><br>
+
+    <label for="lastname">Lastname:</label>
+    <input type="text"  name="lastname" [(ngModel)]="data.lastname"><br><br>
+
+    <label for="username">Username:</label>
+    <input type="text"  name="uastname"  required minlength="4" [(ngModel)]="data.username" #name="ngModel">
+    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger" ></div>
+ 
+  <div *ngIf="name.errors?.required"  class="red"> *Must required...
+    
+  </div>
+  <div *ngIf="name.errors?.minlength" class="red">
+    Name must be at least 4 characters long.
+  </div>
+
+  
+    <br><br><label for="pwd">Password:</label>
+    <input type="password"  name="pwd" required minlength="4" [(ngModel)]="data.password" #name="ngModel" >
+    <div *ngIf="name.errors?.required" class="red" >  *Must required... </div>
+    <div *ngIf="name.errors?.minlength" class="red">
+      Name must be at least 4 characters long.
+    </div>
+  
+    <br><br><label for="repwd">re-enter Password:</label>
+    <input type="password"  name="repwd"  [(ngModel)]="data.repassword" #heroForm="ngModel">
+    <div *ngIf="heroForm.errors?.identityRevealed && (heroForm.touched || heroForm.dirty)"  class="red">
+      password required...
+  </div>
+  
+  <div *ngIf= "data.password!= data.repassword" class="red" > Please Enter Correct password...!!! </div>
+  
+   <br><br> <label for="email">Email:</label>
+   
+    <input type="email"  name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" [(ngModel)]="data.email" #ne="ngModel" >
+   <div *ngIf="ne.errors?.pattern" class="red" >  *invalid data... </div>
+   <div *ngIf="ne.errors?.required" class="red" >  *Must required... </div>
+  
+   <br><br><label for="PhNo">PhoneNo:</label>
+    <input type="number"  name="PhoneNo" required pattern="[6-9]{1}[0-9]{9}" [(ngModel)]="data.phNo" #phno="ngModel">
+    <div *ngIf="phno.errors?.pattern" class="red" >  *invalid data... </div>
+    
+    <br><br><label for="gender">Gender:</label>
+    <select name="gender" [(ngModel)]="data.gender">
+      <option value="male">male</option>
+      <option value="female">female</option>
+      <option value="others">others</option>
+    </select><br><br>
+    <input type="button" value="Submit"  [disabled]="!regcom.form.valid" (click)="submit()">
+  
+  </form>
